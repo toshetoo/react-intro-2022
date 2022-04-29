@@ -1,16 +1,14 @@
-export function Main({ message, counter, stopIntervalFn }) {
+import { Route, Routes } from "react-router-dom";
+import { User } from "../users/user/User";
+import { UsersList } from "../users/users-list/UsersList";
 
-    const onClickHandler = () => {
-        stopIntervalFn();
-    }
-
+export function Main() {
     return (
         <div className="main-content">
-            Main -- { message }
-            <div>
-                Counter -- { counter }
-            </div>
-            <button onClick={onClickHandler}>Stop interval</button>
+            <Routes>
+                <Route exact path="/users-list" element={<UsersList />} />
+                <Route path="/user/:id" element={<User />} />
+            </Routes>
         </div>
     )
 }
