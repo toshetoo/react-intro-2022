@@ -6,8 +6,13 @@ import './UserCard.scss';
 export function UserCard({ user, deleteUser }) {
 
     const navigate = useNavigate();
+    
     const redirectToDetails = () => {
         navigate(`/user/${user.id}`);
+    }
+
+    const redirectToEdit = () => {
+        navigate(`/user/edit/${user.id}`);
     }
 
     if (!user) {
@@ -32,7 +37,7 @@ export function UserCard({ user, deleteUser }) {
                     <span className='value'>{user.phone}</span>
                 </Card.Text>
                 <div className='btn-holder'>
-                    <Button variant="primary">Edit</Button>
+                    <Button variant="primary" onClick={redirectToEdit}>Edit</Button>
                     <Button variant="danger" onClick={() => deleteUser(user.id)}>Delete</Button>
                     <Button variant="info" onClick={redirectToDetails}>Details</Button>
                 </div>                
