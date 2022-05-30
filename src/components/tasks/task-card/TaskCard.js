@@ -12,7 +12,12 @@ export function TaskCard({ task, onTaskDelete, changeStatus }) {
         navigate(`/task/edit/${task.id}`);
     }
 
-    const getNextStateButton = () => {
+    const renderNextStateButton = () => {
+        if (task.authorId !== loggedUser.id && loggedUser.role !== "admin") {
+            return;
+        }
+
+
         switch(task.status) {
             case TaskStatus.NEW: 
                 return <Button variant='warning' onClick={() => changeStatus(TaskStatus.IN_PROGRESS, task.id)}>Move to In Progress</Button>;
@@ -23,10 +28,26 @@ export function TaskCard({ task, onTaskDelete, changeStatus }) {
 
         }
     }
+
+    const renderEditButton = () => {
+        if(loggedUser.role === "admin" || loggedUser.id === task.authorId) {
+            return <Button variant="primary" onClick={navigateToEdit}>Edit</Button>;
+        }
+    }
+
+    const renderDeleteButton = () => {
+        if(loggedUser.role === "admin" || loggedUser.id === task.authorId) {
+            return <Button variant="danger" onClick={() => onTaskDelete(task.id)}>Delete</Button>;
+        }
+    }
+
+    const onDragHandler = (event) => {
+        event.dataTransfer.setData("taskId", task.id);
+    }
     
 
     return (
-        <div className="task-card-wrapper">
+        <div className="task-card-wrapper" draggable={true} onDrag={(event) => onDragHandler(event)}>
             <Card style={{ width: '18rem' }}>
                 <Card.Body>
                     <Card.Title>{ task.title }</Card.Title>
@@ -47,9 +68,9 @@ export function TaskCard({ task, onTaskDelete, changeStatus }) {
                         <span className='value'>{task.dueDate}</span>
                     </Card.Text>
                     <div className='btn-holder'>
-                        { loggedUser && loggedUser.id === task.authorId && <Button variant="primary" onClick={navigateToEdit}>Edit</Button> }
-                        { loggedUser && loggedUser.id === task.authorId && <Button variant="danger" onClick={() => onTaskDelete(task.id)}>Delete</Button> }                             
-                        { getNextStateButton() }
+                        { renderEditButton()  }
+                        { renderDeleteButton()  }                             
+                        { renderNextStateButton() }
                     </div>                
                 </Card.Body>
             </Card>

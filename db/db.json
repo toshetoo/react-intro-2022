@@ -2,24 +2,29 @@
   "users": [
     {
       "id": "f529a9c7-b5bb-4d3c-a451-825c03b12013",
+      "role": "user",
       "isActive": true,
       "picture": "https://picsum.photos/200/300?random=1",
       "name": "Kelly Johns",
       "email": "kellyjohns@caxt.com",
       "phone": "+1 (977) 521-3716",
-      "address": "585 Desmond Court, Ezel, Pennsylvania, 3419"
+      "address": "585 Desmond Court, Ezel, Pennsylvania, 3419",
+      "password": "123"
     },
     {
       "id": "c3cd55ff-03e8-4e06-b4ee-fab89847958c",
+      "role": "user",
       "isActive": false,
       "picture": "https://picsum.photos/200/300?random=2",
       "name": "Tami Carlson 3",
       "email": "tamicarlson@caxt.com",
       "phone": "+1 (988) 494-2020",
-      "address": "515 Hazel Court, Hondah, Alaska, 8525"
+      "address": "515 Hazel Court, Hondah, Alaska, 8525",
+      "password": "123"
     },
     {
       "id": "c5a4e854-9689-4eb0-979a-12212d838d2b",
+      "role": "user",
       "isActive": false,
       "picture": "https://picsum.photos/200/300?random=3",
       "name": "Rosemarie Schneider",
@@ -29,6 +34,7 @@
     },
     {
       "id": "70ad681a-75b0-4f05-8f80-cd5f36de57df",
+      "role": "user",
       "isActive": false,
       "picture": "https://picsum.photos/200/300?random=4",
       "name": "Silva Patton",
@@ -38,6 +44,7 @@
     },
     {
       "id": "7cb88485-534b-4f61-a8e3-07a7fa3bd47f",
+      "role": "user",
       "isActive": false,
       "picture": "https://picsum.photos/200/300?random=5",
       "name": "Bertha Gray",
@@ -47,6 +54,7 @@
     },
     {
       "id": "621a4870-695e-4601-b845-590fca7be53c",
+      "role": "user",
       "isActive": false,
       "picture": "https://picsum.photos/200/300?random=6",
       "name": "Alfreda Miranda",
@@ -56,6 +64,7 @@
     },
     {
       "isActive": false,
+      "role": "user",
       "name": "Todor",
       "picture": "https://picsum.photos/200/300?random=0.10356863333188082",
       "email": "todor@mail.com",
@@ -65,6 +74,7 @@
     },
     {
       "isActive": false,
+      "role": "user",
       "name": "kellyjohns@caxt.com",
       "picture": "kellyjohns@caxt.com",
       "email": "kellyjohns@caxt.comfdsafdsfds",
@@ -74,7 +84,8 @@
       "id": "OEmkWRK"
     },
     {
-      "isActive": false,
+      "isActive": true,
+      "role": "admin",
       "name": "fdsfd",
       "picture": "https://picsum.photos/200/300?random=0.4628852867917759",
       "email": "email@test.com",
@@ -114,6 +125,16 @@
       "authorName": "gsfgsfgf",
       "createdDate": "Fri May 20 2022",
       "id": 4
+    },
+    {
+      "title": "Task 1 new",
+      "description": "fsgfsgfd",
+      "dueDate": "Tue May 31 2022",
+      "status": "In Review",
+      "authorId": "f529a9c7-b5bb-4d3c-a451-825c03b12013",
+      "authorName": "Kelly Johns",
+      "createdDate": "Fri May 27 2022",
+      "id": 5
     }
   ],
   "status": []

@@ -1,9 +1,14 @@
 import axios from 'axios';
 
 const apiUrl = 'http://localhost:3005/users';
+const loggedUserKey = 'loggedUser';
 
 export function getLoggedUser() {
-    return JSON.parse(localStorage.getItem('loggedUser'));
+    return JSON.parse(localStorage.getItem(loggedUserKey));
+}
+
+export async function logout() {
+    localStorage.removeItem(loggedUserKey);
 }
 
 // .then => resolved correctly
@@ -50,8 +55,10 @@ export async function login(user) {
     if (!foundUser)
         throw new Error('Invalid username/password');
 
+    if (!foundUser.isActive)
+        throw new Error('User is blocked');
 
-    localStorage.setItem('loggedUser', JSON.stringify(foundUser));
+    localStorage.setItem(loggedUserKey, JSON.stringify(foundUser));
 
     return foundUser;
 }

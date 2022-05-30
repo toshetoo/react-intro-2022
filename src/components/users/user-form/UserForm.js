@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './UserForm.scss';
-import { getUserById, saveUser } from '../../../utils/http-utils/user-requests';
+import { getLoggedUser, getUserById, saveUser } from '../../../utils/http-utils/user-requests';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export function UserForm() {
 
+    const loggedUser = getLoggedUser();
     const params = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState({
@@ -49,6 +50,25 @@ export function UserForm() {
         })
     }
 
+    const getAdminControls = () => {
+        if (loggedUser.role === "admin") {
+            return (
+                <>
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check type="checkbox" label="Active" name="isActive" checked={user.isActive} onChange={onInputChange} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Select name="role" value={user.role} onChange={onInputChange}>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </Form.Select>
+                </Form.Group>
+                </>
+            );
+                
+        }
+    }
+
     return (
         <div className="user-form-wrapper">
             <Form onSubmit={onFormSubmit}>
@@ -77,9 +97,8 @@ export function UserForm() {
                     <Form.Control type="text" placeholder="Enter adress" name="address" value={user.address} onChange={onInputChange}/>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Active" name="isActive" checked={user.isActive} onChange={onInputChange} />
-                </Form.Group>
+                { getAdminControls() }
+
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

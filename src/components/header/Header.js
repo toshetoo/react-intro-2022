@@ -2,12 +2,20 @@ import './header.scss';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import { Link } from 'react-router-dom';
-import { getLoggedUser } from '../../utils/http-utils/user-requests';
+import { Link, useNavigate } from 'react-router-dom';
+import { getLoggedUser, logout } from '../../utils/http-utils/user-requests';
 
 export function Header() {
     const loggedUser = getLoggedUser();
     const taskUrl = `/tasks/${loggedUser.id}`;
+    const navigate = useNavigate();
+
+    const logoutHandler = () => {
+        logout().then(() => {
+            navigate('/login');
+        });
+    }
+
     return (
         <div className="header">
             <Navbar bg="light" expand="lg">
@@ -21,7 +29,9 @@ export function Header() {
                         <Link className='nav-link' to="/tasks-list">All Tasks</Link>
                         <Link className='nav-link' to={taskUrl}>My Tasks</Link>
                         <Link className='nav-link' to="/task/create">Create task</Link>
+                        
                     </Nav>
+                    <span className='nav-link logout-btn' onClick={logoutHandler}>Logout</span>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

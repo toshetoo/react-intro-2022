@@ -1,10 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
+import { getLoggedUser } from '../../../utils/http-utils/user-requests';
 import './UserCard.scss';
 
-export function UserCard({ user, deleteUser }) {
+export function UserCard({ user, deleteUser, isInDetails }) {
 
+    const loggedUser = getLoggedUser();
     const navigate = useNavigate();
     
     const redirectToDetails = () => {
@@ -38,8 +40,8 @@ export function UserCard({ user, deleteUser }) {
                 </Card.Text>
                 <div className='btn-holder'>
                     <Button variant="primary" onClick={redirectToEdit}>Edit</Button>
-                    <Button variant="danger" onClick={() => deleteUser(user.id)}>Delete</Button>
-                    <Button variant="info" onClick={redirectToDetails}>Details</Button>
+                    { loggedUser.id !== user.id ? <Button variant="danger" onClick={() => deleteUser(user.id)}>Delete</Button> : '' }
+                    { !isInDetails ? <Button variant="info" onClick={redirectToDetails}>Details</Button> : '' }
                 </div>                
             </Card.Body>
         </Card>
